@@ -1,0 +1,26 @@
+{
+  "name": "smart-lens",
+  "version": "1.0.0",
+  "description": "smart lens is project which is goolge lens",
+  "keywords": [
+    "smart",
+    "lens"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github-alt:sheshadrinivas/smart-lens.git"
+  },
+  "license": "MIT",
+  "author": "sheshadrinivas chekuri",
+  "type": "module",
+  "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node main.js"
+  },
+  "dependencies": {
+    "sharp": "^0.34.5"
+  }
+}

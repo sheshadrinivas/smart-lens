@@ -1,18 +1,22 @@
-import * as fs from "fs";
-import crypto from "crypto";
+import sharp from "sharp";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 class Fingerprint {
   constructor(imageUrl) {
-    this.imageUrl = imageUrl;
+    this.imageUrl = path.resolve(__dirname, imageUrl);
   }
 
   async generate() {
     try {
-      const file = await fs.promises.readFile(this.imageUrl);
-
-      const hash = crypto.createHash("sha256").update(file).digest();
-
-      const byteArray = Array.from(hash);
+      const { data, info } = await sharp(this.imageUrl)
+        .ensureAlpha()
+        .raw()
+        .toBuffer({ resolveWithObject: true });
+      const byteArray = Array.from(data);
 
       return byteArray;
     } catch (error) {
@@ -40,16 +44,15 @@ class Fingerprint {
   }
 }
 
-let test = new Fingerprint(
-  "/Users/macbook/code/side-projects/detector/graph.png",
-);
-let test2 = new Fingerprint(
-  "/Users/macbook/code/side-projects/detector/graph_1.png",
-);
-let test3 = new Fingerprint(
-  "/Users/macbook/code/side-projects/detector/graph_2.png",
-);
-const total_array = await Promise.all([test2.generate(), test3.generate()]);
+let test = new Fingerprint("./test/graph.png");
+let test2 = new Fingerprint("./test/graph_1.png");
+let test3 = new Fingerprint("./test/graph_2.png");
+let test4 = new Fingerprint("./test/graph_3.png");
+const total_array = await Promise.all([
+  test2.generate(),
+  test3.generate(),
+  test4.generate(),
+]);
 const testArray = await test.generate();
 
 const match = [];
@@ -65,8 +68,8 @@ for (let i = 0; i < total_array.length; i++) {
     }
   }
 
-  console.log("weight:", weight);
-  match.push(weight);
+  console.log("weight:", (weight / testArray.length) * 100);
+  match.push((weight / testArray.length) * 100);
 }
 
 Math.max(...match);
