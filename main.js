@@ -41,13 +41,13 @@ class Fingerprint {
 }
 
 let test = new Fingerprint(
-  "/Users/macbook/code/side-projects/detector/graph.png",
+  "graph.png",
 );
 let test2 = new Fingerprint(
-  "/Users/macbook/code/side-projects/detector/graph_1.png",
+  "graph_1.png",
 );
 let test3 = new Fingerprint(
-  "/Users/macbook/code/side-projects/detector/graph_2.png",
+  "graph_2.png",
 );
 const total_array = await Promise.all([test2.generate(), test3.generate()]);
 const testArray = await test.generate();
