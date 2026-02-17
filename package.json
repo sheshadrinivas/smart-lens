@@ -18,13 +18,13 @@
     "test": "test"
   },
   "bin": {
-    "orbital.vision": "./main.js",
-    "orbital.vision.system": "./main.js",
+    "orbital.search": "./main.js",
+    "orbital.search.system": "./main.js",
     "launch": "./main.js"
   },
   "scripts": {
-    "orbital.vision": "node main.js",
-    "orbital.vision.system": "node main.js",
+    "orbital.search": "node main.js",
+    "orbital.search.system": "node main.js",
     "launch": "node main.js"
   },
   "dependencies": {
