@@ -18,7 +18,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "node main.js"
+    "orbital.vision": "node main.js",
+    "orbital.vision.system": "node main.js",
+    "launch": "node main.js"
   },
   "dependencies": {
     "sharp": "^0.34.5"

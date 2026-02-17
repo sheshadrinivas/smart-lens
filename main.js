@@ -1,9 +1,22 @@
 import sharp from "sharp";
 import path from "path";
 import { fileURLToPath } from "url";
+const args = process.argv.slice(2);
 
+if (args.length === 0) {
+  console.log("⚠️ No images provided.");
+  process.exit(1);
+}
+
+console.log("Orbital Vision System (OVS)");
+console.log("Processing images:");
+for (let a = 1; a < args.length; a++) {
+  console.log(args[a]);
+}
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const total_array = [];
 
 class Fingerprint {
   constructor(imageUrl) {
@@ -44,17 +57,12 @@ class Fingerprint {
   }
 }
 
-let test = new Fingerprint("./test/graph.png");
-let test2 = new Fingerprint("./test/graph_1.png");
-let test3 = new Fingerprint("./test/graph_2.png");
-let test4 = new Fingerprint("./test/graph_3.png");
-const total_array = await Promise.all([
-  test2.generate(),
-  test3.generate(),
-  test4.generate(),
-]);
+for (let i = 1; i < args.length; i++) {
+  const test = new Fingerprint(args[i]);
+  total_array.push(await test.generate());
+}
+const test = new Fingerprint(args[0]);
 const testArray = await test.generate();
-
 const match = [];
 for (let i = 0; i < total_array.length; i++) {
   let weight = 0;
@@ -76,4 +84,4 @@ Math.max(...match);
 const maxValue = Math.max(...match);
 const index = match.indexOf(maxValue);
 
-console.log("array:", total_array[index]);
+console.log("best match:", args[index + 1]);
