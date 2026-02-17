@@ -1,7 +1,7 @@
+#!/usr/bin/env node
 import sharp from "sharp";
-import path from "path";
-import { fileURLToPath } from "url";
-const args = process.argv.slice(0);
+
+const args = process.argv.slice(2);
 
 if (args.length === 0) {
   console.log("⚠️ No images provided.");
@@ -13,14 +13,12 @@ console.log("Processing images:");
 for (let a = 1; a < args.length; a++) {
   console.log(args[a]);
 }
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const total_array = [];
 
 class Fingerprint {
   constructor(imageUrl) {
-    this.imageUrl = path.resolve(__dirname, imageUrl);
+    this.imageUrl = imageUrl;
   }
 
   async generate() {

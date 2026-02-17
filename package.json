@@ -17,6 +17,11 @@
   "directories": {
     "test": "test"
   },
+  "bin": {
+    "orbital.vision": "./main.js",
+    "orbital.vision.system": "./main.js",
+    "launch": "./main.js"
+  },
   "scripts": {
     "orbital.vision": "node main.js",
     "orbital.vision.system": "node main.js",
