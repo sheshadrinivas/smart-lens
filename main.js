@@ -1,7 +1,7 @@
 import sharp from "sharp";
 import path from "path";
 import { fileURLToPath } from "url";
-const args = process.argv.slice(2);
+const args = process.argv.slice(0);
 
 if (args.length === 0) {
   console.log("⚠️ No images provided.");
