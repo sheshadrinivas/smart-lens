@@ -19,7 +19,7 @@ async function playSound(url) {
   }
 }
 
-function sleep(ms) {
+async function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
@@ -35,7 +35,7 @@ if (args.length === 0) {
   process.exit(1);
 }
 console.log("");
-playSound("sounds/sound_1.mp3");
+await playSound("sounds/sound_1.mp3");
 await stringPrint("Orbital Vision System (OVS)", 40, "green");
 console.log("");
 console.log(chalk.italic.green("Processing images ["));
@@ -99,7 +99,7 @@ for (let i = 1; i < args.length; i++) {
 const test = new Fingerprint(args[0]);
 const testArray = await test.generate();
 const match = [];
-playSound("sounds/sound_2.mp3");
+await playSound("sounds/sound_2.mp3");
 await stringPrint("Initializing image matching...", 25, "yellow");
 for (let i = 0; i < total_array.length; i++) {
   let weight = 0;
